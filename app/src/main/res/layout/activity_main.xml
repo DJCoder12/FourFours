@@ -4,20 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#00c3ff"
     tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/User_Input"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:textColor="#000"
         app:layout_constraintBottom_toTopOf="@+id/Buttons"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/border"/>
 
     <TextView
         android:id="@+id/Rand_num"
         android:layout_width="250dp"
         android:layout_height="50dp"
         android:text="Your number to generate is"
+        android:textColor="#000"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/Buttons"
         app:layout_constraintBottom_toTopOf="@id/Score"/>
@@ -27,6 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="165dp"
         android:text="Your Score is 0"
+        android:textColor="#000"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/Rand_num" />
@@ -37,6 +42,7 @@
         android:layout_height="75dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        android:textColor="#000"
         app:layout_constraintTop_toBottomOf="@id/Score" />
 
     <Button
@@ -150,7 +156,8 @@
             android:layout_height="46dp"
             android:layout_row="3"
             android:layout_column="2"
-            android:text="Enter" />
+            android:background="#33cc5a"
+            android:text="=" />
 
     </GridLayout>
 
