@@ -11,15 +11,14 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         app:layout_constraintBottom_toTopOf="@+id/Buttons"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/Rand_num"
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="50dp"
         android:text="Your number to generate is"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/Buttons"
         app:layout_constraintBottom_toTopOf="@id/Score"/>
 
@@ -27,12 +26,27 @@
         android:id="@+id/Score"
         android:layout_width="match_parent"
         android:layout_height="165dp"
-        android:layout_marginTop="276dp"
         android:text="Your Score is 0"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/Buttons" />
+        app:layout_constraintTop_toBottomOf="@id/Rand_num" />
+
+    <TextView
+        android:id="@+id/Time"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/Score" />
+
+    <Button
+        android:id="@+id/NewNum"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        app:layout_constraintRight_toRightOf="@id/Score"
+        app:layout_constraintTop_toBottomOf="@id/Buttons"
+        android:onClick="reset"
+        android:text="New Number" />
 
 
     <GridLayout
@@ -140,12 +154,6 @@
 
     </GridLayout>
 
-    <TextView
-        android:id="@+id/Time"
-        android:layout_width="match_parent"
-        android:layout_height="165dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/Score" />
+
 
 </android.support.constraint.ConstraintLayout>

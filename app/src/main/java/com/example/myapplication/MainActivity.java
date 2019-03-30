@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -29,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         tv.setText(s);
 
 
-        new CountDownTimer(60000, 1000) {
+        timer = new CountDownTimer(60000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 TextView time = (TextView) findViewById(R.id.Time);
@@ -41,6 +43,21 @@ public class MainActivity extends AppCompatActivity {
                 time.setText("Done!");
             }
         }.start();
+
+    }
+
+    protected void reset(View v)
+    {
+        TextView userInput = (TextView) findViewById(R.id.User_Input);
+        TextView tv = (TextView) findViewById(R.id.Rand_num);
+        TextView score = (TextView) findViewById(R.id.Score);
+        Random rand = new Random();
+        int n = rand.nextInt(50);
+        tv.setText("Your number to generate is " + n);
+        score.setText("Your score is: 0");
+        userInput.setText("");
+        timer.cancel();
+        timer.start();
 
     }
 
