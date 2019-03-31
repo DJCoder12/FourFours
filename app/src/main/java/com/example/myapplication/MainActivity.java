@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "FourFours";
     protected TextView logoTW;
     protected long finalTime;
+    ArrayList allEquations = new ArrayList();
     Random rand;
     int n;
     protected ArrayList equation = new ArrayList();
@@ -220,6 +221,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void checkNum(View v){
         int counter = 0;
+        TextView time = (TextView) findViewById(R.id.Time);
         for (int j=0;j<equation.size(); j++)
         {
             if (equation.get(j) == "4"){
@@ -227,7 +229,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         }
-        if (counter<=4 && counter!=0) {
+        if (counter<=4 && counter!=0 && !time.getText().toString().equals("Done!") && !allEquations.contains(equation) ) {
             Double result = calc(equation);
             if (new Double(n).equals(result)) {
                 TextView score = (TextView) findViewById(R.id.Score);
@@ -235,6 +237,7 @@ public class MainActivity extends AppCompatActivity {
                 int oldScore = (int) (playerScore.charAt(score.length() - 1));
                 int newScore = oldScore + 1;
                 score.setText("Your Score is " + newScore);
+                allEquations.add(equation);
 
             }
 
