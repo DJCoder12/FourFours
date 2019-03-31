@@ -196,9 +196,10 @@ public class MainActivity extends AppCompatActivity {
         return result;
     }
 
-    protected void checkNum(View v){
+    //protected void checkNum(View v){
 
-    }
+
+    //}
 
     protected Double calc(ArrayList terms){
         Double ans = 0.0;
@@ -215,6 +216,7 @@ public class MainActivity extends AppCompatActivity {
             //deal with all the square roots and logs
             //then convert to postfix and calculate
             while (terms.contains("log") || terms.contains("sqrt")) {
+                System.out.println(terms);
                 int idx = 0;
                 int firstLog = terms.indexOf("log");
                 int firstRoot = terms.indexOf("sqrt");
@@ -234,14 +236,16 @@ public class MainActivity extends AppCompatActivity {
                         parenCheck += 1;
                         closeParen += 1;
                         term = terms.get(closeParen).toString();
-                    } else if (parenCheck == 0) {
-                        if (term.equals(")")) {
-                            lastFound = true;
-                        } else {
+                    }
+                    else if (parenCheck == 1 && term.equals(")")) {
+                        lastFound = true;
+                    }
+                    else {
+                        if(term.equals(")")){
                             parenCheck -= 1;
-                            closeParen += 1;
-                            term = terms.get(closeParen).toString();
                         }
+                        closeParen += 1;
+                        term = terms.get(closeParen).toString();
                     }
                 }
                 //split the array into three parts: before the log/root term, the log/root term, and after the log/root term
@@ -298,16 +302,25 @@ public class MainActivity extends AppCompatActivity {
                 term = terms.get(i).toString();
             }
             else if(openParen == 0){
-                if(term.equals(',')){
+                if(term.equals(",")){
                     commaFound = true;
                 }
+                else{
+                    i += 1;
+                    term = terms.get(i).toString();
+                }
+            }
+            else{
+                i += 1;
+                term = terms.get(i).toString();
             }
         }
         ArrayList base = new ArrayList(terms.subList(0, i));
         ArrayList num = new ArrayList(terms.subList(i+1, terms.size()));
         Double b = calc(base);
         Double n = calc(num);
-        Double ans = Math.log(b)/Math.log(n);
+        Double ans = Math.log(n)/Math.log(b);
+
         return ans;
     }
 
