@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.content.Intent;
 import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,14 +19,16 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "FourFours";
     protected TextView logoTW;
     protected long finalTime;
+    Random rand;
+    int n;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Random rand = new Random();
-        int n = rand.nextInt(50);
+        rand = new Random();
+        n = rand.nextInt(50);
         TextView tv = (TextView) findViewById(R.id.Rand_num);
         String s = tv.getText().toString();
         s += " " + n;
@@ -61,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
         timer.start();
 
     }
+
 
 
     protected String addDecimal(View v) {
@@ -170,6 +174,13 @@ public class MainActivity extends AppCompatActivity {
         return s;
     }
 
+    protected void addComma(View v){
+        TextView tv = (TextView) findViewById(R.id.User_Input);
+        String s = tv.getText().toString();
+        s += ",";
+        tv.setText(s);
+    }
+
     protected float add(float num, float num2) {
         float result = num + num2;
         return result;
@@ -197,6 +208,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected void checkNum(View v){
+        TextView userInput = (TextView) findViewById(R.id.User_Input);
+        ArrayList expression = new ArrayList();
+        String s = userInput.getText().toString();
+        for (int i = 0; i<s.length();i++)
+        {
+            expression.add(s.charAt(i));
+
+        }
+
+        Double result = calc(expression);
+        if (result == n)
+        {
+            TextView score = (TextView) findViewById(R.id.Score);
+            String playerScore = score.getText().toString();
+            int oldScore = (int)(playerScore.charAt(score.length()-1));
+            int newScore = oldScore + 1;
+            score.setText("Your Score is " + newScore );
+
+        }
 
     }
 
@@ -315,5 +345,10 @@ public class MainActivity extends AppCompatActivity {
         Double ans = 0.0;
         ans = Math.sqrt(calc(terms));
         return ans;
+    }
+
+    public void HowTo(View v) {
+        Intent intent = new Intent(this, HowTo.class);
+        startActivity(intent);
     }
 }

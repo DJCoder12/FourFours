@@ -54,13 +54,23 @@
         android:onClick="reset"
         android:text="New Number" />
 
+    <Button
+        android:id="@+id/HowTo"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/Time"
+        android:onClick="HowTo"
+
+        android:text="How To Play" />
+
 
     <GridLayout
         android:id="@+id/Buttons"
         android:layout_width="411dp"
         android:layout_height="200dp"
-        android:columnCount="4"
-        android:rowCount="4"
+        android:columnCount="5"
+        android:rowCount="5"
         app:layout_constraintBottom_toTopOf="@id/Score"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/User_Input">
@@ -151,13 +161,50 @@
             android:text="C" />
 
         <Button
-            android:id="@+id/btn_Enter"
+        android:id="@+id/btn_Enter"
+        android:layout_width="85dp"
+        android:layout_height="46dp"
+        android:layout_row="3"
+        android:layout_column="2"
+        android:background="#33cc5a"
+        android:onClick="checkNum"
+        android:text="=" />
+
+        <Button
+            android:id="@+id/btn_Comma"
+            android:layout_width="85dp"
+            android:layout_height="46dp"
+            android:layout_row="0"
+            android:layout_column="3"
+
+            android:onClick="addComma"
+            android:text="," />
+
+        <Button
+            android:id="@+id/btn_Empty1"
+            android:layout_width="85dp"
+            android:layout_height="46dp"
+            android:layout_row="1"
+            android:layout_column="3"
+            />
+
+        <Button
+            android:id="@+id/btn_Empty2"
+            android:layout_width="85dp"
+            android:layout_height="46dp"
+            android:layout_row="2"
+            android:layout_column="3"
+
+            />
+
+        <Button
+            android:id="@+id/btn_Empty3"
             android:layout_width="85dp"
             android:layout_height="46dp"
             android:layout_row="3"
-            android:layout_column="2"
-            android:background="#33cc5a"
-            android:text="=" />
+            android:layout_column="3"
+
+            />
 
     </GridLayout>
 
