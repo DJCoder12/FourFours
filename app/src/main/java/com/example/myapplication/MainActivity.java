@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     protected long finalTime;
     Random rand;
     int n;
+    protected ArrayList equation = new ArrayList();
 
 
     @Override
@@ -50,13 +51,13 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    protected void reset(View v)
+    public void reset(View v)
     {
         TextView userInput = (TextView) findViewById(R.id.User_Input);
         TextView tv = (TextView) findViewById(R.id.Rand_num);
         TextView score = (TextView) findViewById(R.id.Score);
         Random rand = new Random();
-        int n = rand.nextInt(50);
+        n = rand.nextInt(50);
         tv.setText("Your number to generate is " + n);
         score.setText("Your score is: 0");
         userInput.setText("");
@@ -77,54 +78,59 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    protected String add4(View v) {
+    public String add4(View v) {
         TextView tv = (TextView) findViewById(R.id.User_Input);
         String s = tv.getText().toString();
 
         s += "4";
+        equation.add("4");
         tv.setText(s);
         return s;
     }
 
-    protected String addSign(View v) {
+    public String addSign(View v) {
         TextView tv = (TextView) findViewById(R.id.User_Input);
         String s = tv.getText().toString();
         if (s.length() == 7) {
             return s;
         }
         s += "+";
+        equation.add("+");
         tv.setText(s);
         return s;
     }
 
-    protected String subtractSign(View v) {
+    public String subtractSign(View v) {
         TextView tv = (TextView) findViewById(R.id.User_Input);
         String s = tv.getText().toString();
         if (s.length() == 0) {
             return s;
         }
         s += "-";
+        equation.add("-");
         tv.setText(s);
         return s;
     }
 
-    protected String multiplySign(View v) {
+    public String multiplySign(View v) {
         TextView tv = (TextView) findViewById(R.id.User_Input);
         String s = tv.getText().toString();
         s += "*";
+        equation.add("*");
         tv.setText(s);
         return s;
     }
 
-    protected String divisionSign(View v) {
+    public String divisionSign(View v) {
         TextView tv = (TextView) findViewById(R.id.User_Input);
         String s = tv.getText().toString();
         s += "/";
+        equation.add("/");
         tv.setText(s);
         return s;
     }
 
-    protected String addExponentSign(View v) {
+    public String addExponentSign(View v) {
         TextView tv = (TextView) findViewById(R.id.User_Input);
         String s = tv.getText().toString();
         s += "^";
@@ -132,51 +138,57 @@ public class MainActivity extends AppCompatActivity {
         return s;
     }
 
-    protected String addOpenParen(View v) {
+    public String addOpenParen(View v) {
         TextView tv = (TextView) findViewById(R.id.User_Input);
         String s = tv.getText().toString();
         s += "(";
+        equation.add("(");
         tv.setText(s);
         return s;
     }
 
-    protected String clear(View v) {
+    public String clear(View v) {
         TextView tv = (TextView) findViewById(R.id.User_Input);
         String b = "";
+        equation = new ArrayList();
         tv.setText(b);
         return b;
     }
 
-    protected String logs(View v) {
+    public String logs(View v) {
         TextView tv = (TextView) findViewById(R.id.User_Input);
         String b = tv.getText().toString(); ;
         int c = 0;
         b += "log";
+        equation.add("log");
         tv.setText(b);
         return b;
     }
 
-    protected String sqrt(View v) {
+    public String sqrt(View v) {
         TextView tv = (TextView) findViewById(R.id.User_Input);
         String b = tv.getText().toString(); ;
         int c = 0;
         b += "sqrt";
+        equation.add("sqrt");
         tv.setText(b);
         return b;
     }
 
-    protected String addEndParen(View v) {
+    public String addEndParen(View v) {
         TextView tv = (TextView) findViewById(R.id.User_Input);
         String s = tv.getText().toString();
         s += ")";
+        equation.add(")");
         tv.setText(s);
         return s;
     }
 
-    protected void addComma(View v){
+    public void addComma(View v){
         TextView tv = (TextView) findViewById(R.id.User_Input);
         String s = tv.getText().toString();
         s += ",";
+        equation.add(",");
         tv.setText(s);
     }
 
@@ -206,18 +218,9 @@ public class MainActivity extends AppCompatActivity {
         return result;
     }
 
-    protected void checkNum(View v){
-        TextView userInput = (TextView) findViewById(R.id.User_Input);
-        ArrayList expression = new ArrayList();
-        String s = userInput.getText().toString();
-        for (int i = 0; i<s.length();i++)
-        {
-            expression.add(s.charAt(i));
-
-        }
-
-        Double result = calc(expression);
-        if (result == n)
+    public void checkNum(View v){
+        Double result = calc(equation);
+        if (new Double(n).equals(result))
         {
             TextView score = (TextView) findViewById(R.id.Score);
             String playerScore = score.getText().toString();
@@ -225,6 +228,10 @@ public class MainActivity extends AppCompatActivity {
             int newScore = oldScore + 1;
             score.setText("Your Score is " + newScore );
 
+        }
+        else{
+            Log.d(TAG, "n: " + n + " Result: " + result);
+            clear(v);
         }
 
     }
