@@ -228,7 +228,8 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         if (counter<=4 && counter>0) {
-            Double result = calc(equation);
+            Double result = Math.rint(calc(equation));
+
             if (new Double(n).equals(result)) {
                 TextView score = (TextView) findViewById(R.id.Score);
                 String playerScore = score.getText().toString();
