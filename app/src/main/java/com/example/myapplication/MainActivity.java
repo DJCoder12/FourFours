@@ -235,7 +235,7 @@ public class MainActivity extends AppCompatActivity {
             if (new Double(n).equals(result)) {
                 TextView score = (TextView) findViewById(R.id.Score);
                 String playerScore = score.getText().toString();
-                int curScore = newScore + 1;
+                newScore += 1;
                 score.setText("Your Score is " + newScore);
                 allEquations.add(equation);
 
