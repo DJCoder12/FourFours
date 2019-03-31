@@ -219,21 +219,33 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void checkNum(View v){
-        Double result = calc(equation);
-        if (new Double(n).equals(result))
+        int counter = 0;
+        for (int j=0;j<equation.size(); j++)
         {
-            TextView score = (TextView) findViewById(R.id.Score);
-            String playerScore = score.getText().toString();
-            int oldScore = (int)(playerScore.charAt(score.length()-1));
-            int newScore = oldScore + 1;
-            score.setText("Your Score is " + newScore );
+            if (equation.get(j) == "4"){
+                counter++;
 
+            }
+        }
+        if (counter<=4 && counter>0) {
+            Double result = calc(equation);
+            if (new Double(n).equals(result)) {
+                TextView score = (TextView) findViewById(R.id.Score);
+                String playerScore = score.getText().toString();
+                int oldScore = (int) (playerScore.charAt(score.length() - 1));
+                int newScore = oldScore + 1;
+                score.setText("Your Score is " + newScore);
+
+            }
+
+            else{
+                Log.d(TAG, "n: " + n + " Result: " + result);
+                clear(v);
+            }
         }
         else{
-            Log.d(TAG, "n: " + n + " Result: " + result);
             clear(v);
         }
-
     }
 
     protected Double calc(ArrayList terms){
