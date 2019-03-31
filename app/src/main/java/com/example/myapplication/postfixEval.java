@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 public class postfixEval {
-    public static void main(String[] args){}
+    public static void main(String[] args){
+    }
 
     public static double postEval(ArrayList postFix) {
         Stack<Double> operands = new Stack<Double>();
