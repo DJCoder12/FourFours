@@ -227,7 +227,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         }
-        if (counter<=4 && counter>0) {
+        if (counter<=4 && counter!=0) {
             Double result = calc(equation);
             if (new Double(n).equals(result)) {
                 TextView score = (TextView) findViewById(R.id.Score);
