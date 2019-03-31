@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#00c3ff"
+    android:background="#2E8DAD"
     tools:context=".MainActivity">
 
     <TextView
@@ -145,15 +145,6 @@
 
 
         <Button
-            android:id="@+id/btn_Expon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_row="2"
-            android:layout_column="2"
-            android:onClick="addExponentSign"
-            android:text="^" />
-
-        <Button
             android:id="@+id/btn_Clear"
             android:layout_row="3"
             android:layout_column="0"
@@ -166,7 +157,7 @@
         android:layout_height="46dp"
         android:layout_row="3"
         android:layout_column="2"
-        android:background="#33cc5a"
+        android:background="#2AAA57"
         android:onClick="checkNum"
         android:text="=" />
 
@@ -174,13 +165,13 @@
             android:id="@+id/btn_Comma"
             android:layout_width="85dp"
             android:layout_height="46dp"
-            android:layout_row="0"
-            android:layout_column="3"
+            android:layout_row="2"
+            android:layout_column="2"
 
             android:onClick="addComma"
             android:text="," />
 
-        <Button
+        <!--<Button
             android:id="@+id/btn_Empty1"
             android:layout_width="85dp"
             android:layout_height="46dp"
@@ -204,7 +195,7 @@
             android:layout_row="3"
             android:layout_column="3"
 
-            />
+            />-->
 
     </GridLayout>
 
