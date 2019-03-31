@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList allEquations = new ArrayList();
     Random rand;
     int n;
+    int newScore = 0;
     protected ArrayList equation = new ArrayList();
 
 
@@ -234,8 +235,7 @@ public class MainActivity extends AppCompatActivity {
             if (new Double(n).equals(result)) {
                 TextView score = (TextView) findViewById(R.id.Score);
                 String playerScore = score.getText().toString();
-                int oldScore = (int) (playerScore.charAt(score.length() - 1));
-                int newScore = oldScore + 1;
+                int curScore = newScore + 1;
                 score.setText("Your Score is " + newScore);
                 allEquations.add(equation);
 
