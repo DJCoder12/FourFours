@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -193,5 +194,126 @@ public class MainActivity extends AppCompatActivity {
     protected Double exponentiation(Double num, Double num2) {
         Double result = Math.pow(num, num2);
         return result;
+    }
+
+    protected void checkNum(View v){
+
+    }
+
+    protected Double calc(ArrayList terms){
+        Double ans = 0.0;
+        //if there's only one thing in the list it should be a number
+        //return that
+        if(terms.size() == 1){
+            try {
+                ans = new Double(terms.get(0).toString());
+                return ans;
+            }
+            catch (NumberFormatException e){}
+        }
+        else {
+            //deal with all the square roots and logs
+            //then convert to postfix and calculate
+            while (terms.contains("log") || terms.contains("sqrt")) {
+                int idx = 0;
+                int firstLog = terms.indexOf("log");
+                int firstRoot = terms.indexOf("sqrt");
+                if (firstLog == -1 || firstRoot == -1) {
+                    idx = Math.max(firstLog, firstRoot);
+                } else {
+                    idx = Math.min(firstLog, firstRoot);
+                }
+                //idx is now the index of the first occurrence of sqrt or log
+                //closeParen will be the index of the proper closing parenthesis for that term
+                int closeParen = idx + 1;
+                String term = terms.get(closeParen).toString();
+                int parenCheck = 0;
+                boolean lastFound = false;
+                while (!lastFound) {
+                    if (term.equals("(")) {
+                        parenCheck += 1;
+                        closeParen += 1;
+                        term = terms.get(closeParen).toString();
+                    } else if (parenCheck == 0) {
+                        if (term.equals(")")) {
+                            lastFound = true;
+                        } else {
+                            parenCheck -= 1;
+                            closeParen += 1;
+                            term = terms.get(closeParen).toString();
+                        }
+                    }
+                }
+                //split the array into three parts: before the log/root term, the log/root term, and after the log/root term
+                ArrayList beforeTerm = new ArrayList();
+                try {
+                    beforeTerm = new ArrayList(terms.subList(0, idx));
+                } catch (IllegalArgumentException e) {
+                }
+                ArrayList termPart = new ArrayList(terms.subList(idx + 2, closeParen));
+                ArrayList afterTerm = new ArrayList();
+                try {
+                    afterTerm = new ArrayList(terms.subList(closeParen + 1, terms.size()));
+                } catch (IllegalArgumentException e) {
+                } catch (IndexOutOfBoundsException e) {
+                }
+                Double newTerm = 0.0;
+                if (terms.get(idx).toString().equals("log")) {
+                    newTerm = parseLogs(termPart);
+                } else {
+                    newTerm = parseRoot(termPart);
+                }
+                //now that the termPart was calculated, put the parts back together and make terms the new array
+                beforeTerm.add(newTerm.toString());
+                beforeTerm.addAll(afterTerm);
+                terms = beforeTerm;
+            }
+        }
+        //at this point terms should contain no logs or square roots
+        //convert to postfix and evaluate
+        ArrayList postTerms = shuntingYard.postfix(terms);
+        ans = postfixEval.postEval(postTerms);
+
+        return ans;
+    }
+
+    protected Double parseLogs(ArrayList terms){
+        //take in the section of the whole term list that started with "log(" and ended with the matching end parenthesis
+        //Should have a comma separating the base and the value
+        //this function separates the base and the value, calculates those values, and return the log base b of n
+        //might contain another log, so make sure the comma isn't in an unclosed parenthesis section
+        int openParen = 0;
+        Boolean commaFound = false;
+        int i = 0;
+        String term = terms.get(i).toString();
+        while(!commaFound){
+            if(term.equals("(")){
+                openParen += 1;
+                i += 1;
+                term = terms.get(i).toString();
+            }
+            else if(term.equals(")")){
+                openParen -= 1;
+                i += 1;
+                term = terms.get(i).toString();
+            }
+            else if(openParen == 0){
+                if(term.equals(',')){
+                    commaFound = true;
+                }
+            }
+        }
+        ArrayList base = new ArrayList(terms.subList(0, i));
+        ArrayList num = new ArrayList(terms.subList(i+1, terms.size()));
+        Double b = calc(base);
+        Double n = calc(num);
+        Double ans = Math.log(b)/Math.log(n);
+        return ans;
+    }
+
+    protected Double parseRoot(ArrayList terms){
+        Double ans = 0.0;
+        ans = Math.sqrt(calc(terms));
+        return ans;
     }
 }
